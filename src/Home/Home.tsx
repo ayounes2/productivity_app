@@ -3,35 +3,25 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { Alert, Button, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { styles } from './style';
-
-type DomainProps = {
-  id: number,
-  name: string,
-  activities: Array<string>
-}
-
-
-let myDomains: Array<DomainProps> = [{
-  id: 1,
-  name: 'Indoor',
-  activities: ['Apex', 'Doto', 'tiktok', 'Apex2', 'Doto2', 'tiktok2', 'Apex3', 'Doto3', 'tiktok3'],
-}, {
-  id: 2,
-  name: 'Outdoor',
-  activities: ['Cycling', 'Walk in the Park'],
-}, {
-  id: 3,
-  name: 'test',
-  activities: ['Cycling', 'Walk in the Park'],
-}];
+import { AddModal } from './AddModal';
+import { DomainProps, myDomains } from './data';
 
 const HomePage = ({ navigation }: { navigation: any }) => {
   useEffect(() => {
     setDomains(myDomains);
-  }, []);
+  }, [myDomains]);
 
   const [domains, setDomains] = useState(Array<DomainProps>);
   const [modalVisible, setModalVisible] = useState(false);
+
+  const handleCancel = () => {
+    setModalVisible(false);
+  }
+  const handleSave = (domainName: string) => {
+    console.log("saved" + domainName);
+    setDomains(domains.concat({ id: domains.length + 1, name: domainName, activities: [] }));
+    setModalVisible(false);
+  }
 
   return (
     <ScrollView style={styles.view}>
@@ -39,21 +29,16 @@ const HomePage = ({ navigation }: { navigation: any }) => {
         <Domain key={singleDomain.id} myDomain={singleDomain} />
       ))}
       <Modal
-        animationType="slide"
-        transparent={false}
+        animationType="fade"
         visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
-        <Text>yeeeet</Text>
+      >
+        <AddModal onCancel={handleCancel} onSave={handleSave} />
       </Modal>
       <Button
         onPress={() => {
           setModalVisible(!modalVisible);
-          //setDomains(domains.concat({ id: domains.length + 1, name: 'yeet', activities: [] }));
         }}
-        title="Add Domain"
+        title="Add Item"
         color="#841584"
       />
     </ScrollView >
