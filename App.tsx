@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Splash from './src/Splash/Splash';
 import HomePage from './src/Home/Home';
 import { connectToDatabase, createTables } from './src/db/db';
@@ -9,11 +9,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const [db, setDb] = useState<any>(null);
 
   const loadData = useCallback(async () => {
     const database = await connectToDatabase();
-    setDb(database);
     // create and seed tables if not exist
     const dataSeeded = await AsyncStorage.getItem('dataSeeded');
     if (dataSeeded === null) {
@@ -38,7 +36,6 @@ const App = () => {
         <Stack.Screen
           name='Home'
           component={HomePage}
-          initialParams={db}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

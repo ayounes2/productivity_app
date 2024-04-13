@@ -3,11 +3,12 @@ import { Button, Modal, Pressable, ScrollView, Text, View } from 'react-native';
 import { styles } from './style';
 import { AddModal } from './AddModal';
 import { getDomains, Domain } from '../db/domain';
-import { SQLiteDatabase } from 'react-native-sqlite-storage';
+import { connectToDatabase } from '../db/db';
 
-const HomePage = ({ navigation, db }: { navigation: any, db: SQLiteDatabase }) => {
+const HomePage = ({ navigation }: { navigation: any }) => {
   const init = async () => {
-    var domains = await getDomains(db);
+    const db = await connectToDatabase();
+    const domains = await getDomains(db);
     setDomains(domains);
   }
 
