@@ -11,12 +11,13 @@ const Stack = createNativeStackNavigator();
 const App = () => {
 
   const loadData = useCallback(async () => {
-    const database = await connectToDatabase();
     // create and seed tables if not exist
     const dataSeeded = await AsyncStorage.getItem('dataSeeded');
     if (dataSeeded === null) {
-      await createTables(database);
+      const db = await connectToDatabase();
+      await createTables(db);
       await AsyncStorage.setItem('dataSeeded', 'true');
+      db.close()
     }
   }, []);
 
