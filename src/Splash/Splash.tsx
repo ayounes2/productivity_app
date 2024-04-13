@@ -16,8 +16,12 @@ const styles = StyleSheet.create({
 
 const Splash = ({ navigation }: { navigation: any }) => {
   setTimeout(() => {
-    navigation.replace('Home');
-  }, 2000);
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Home' }],
+    });
+  }, 2000)
+
   return (
     <View style={styles.view}>
       <Image source={require('../../assets/windows-vista-logo.png')} style={styles.image} />
