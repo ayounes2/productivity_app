@@ -18,7 +18,7 @@ const Splash = ({ navigation }: { navigation: any }) => {
   setTimeout(() => {
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Home' }],
+      routes: [{ name: 'DomainList' }],
     });
   }, 2000)
 

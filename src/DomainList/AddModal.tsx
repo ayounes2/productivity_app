@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Alert, Button, Modal, StyleSheet, Switch, Text, TextInput, View } from "react-native"
 import DropDownPicker from "react-native-dropdown-picker";
-import { DomainProps } from "./data";
 
 
 interface ModalProps {
