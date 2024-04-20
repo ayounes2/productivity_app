@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useCallback, useEffect } from 'react';
 import Splash from './src/Splash/Splash';
-import { connectToDatabase, createTables } from './src/db/db';
+import { ConnectToDatabase, CreateTables } from './src/Db/Database';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DomainListPage from './src/DomainList/DomainList';
 import ActivityListPage from './src/Activity/ActivityList';
@@ -15,8 +15,8 @@ function App() {
     // create and seed tables if not exist
     const dataSeeded = await AsyncStorage.getItem('dataSeeded');
     if (dataSeeded === null) {
-      const db = await connectToDatabase();
-      await createTables(db);
+      const db = await ConnectToDatabase();
+      await CreateTables(db);
       await AsyncStorage.setItem('dataSeeded', 'true');
       db.close()
     }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native"
-import { Domain, addDomain } from '../db/domain';
-import { connectToDatabase } from "../db/db";
+import { Activity, AddActivity } from '../Db/Activity';
+import { ConnectToDatabase } from "../Db/Database";
 
 
 interface ModalProps {
@@ -29,22 +29,28 @@ const styles = StyleSheet.create({
     },
 });
 
-export function AddModal({ onFinish }: Readonly<ModalProps>) {
+export function AddActivityModal(onFinish: any, domainId: number): Readonly<ModalProps> {
     const [name, setName] = useState('');
 
     async function handleSave() {
-        const myDomain: Domain = {
+        const myActivity: Activity = {
             id: null,
-            name: name
-        };
-        const db = await connectToDatabase()
-        await addDomain(db, myDomain)
+            name: name,
+            estimatedTime: 1,
+            domainId: domainId
+        }
+        // const myDomain: Domain = {
+        //     id: null,
+        //     name: name
+        // };
+        const db = await ConnectToDatabase()
+        // await AddDomain(db, myDomain)
         onFinish()
     }
 
     return (
         <View style={styles.view}>
-            <Text style={styles.formHeader}>Domain Name</Text>
+            <Text style={styles.formHeader}>Activity Name</Text>
             <TextInput onChangeText={setName} value={name} style={styles.input} />
             <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
                 <Button color={'maroon'} onPress={onFinish} title="Cancel" />

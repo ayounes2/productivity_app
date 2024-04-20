@@ -1,30 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal, ScrollView } from 'react-native';
-import { Domain, getDomains } from '../db/domain';
-import { connectToDatabase } from '../db/db';
-import { AddModal } from './AddModal';
+import { Domain, GetDomains } from '../Db/Domain';
+import { ConnectToDatabase } from '../Db/Database';
+import { AddDomainModal } from './AddDomainModal';
 import { styles } from './style';
 
 function DomainListPage({ navigation }: Readonly<{ navigation: any }>) {
+  const [domains, setDomains] = useState(Array<Domain>)
   const [modalVisible, setModalVisible] = useState(false)
 
   async function init() {
-    const db = await connectToDatabase()
-    const dbDomains = await getDomains(db)
+    const db = await ConnectToDatabase()
+    const dbDomains = await GetDomains(db)
     setDomains(dbDomains)
     db.close()
+  }
+
+  async function onFinish() {
+    setModalVisible(false)
+    await init()
   }
 
   useEffect(() => {
     init()
   }, [])
 
-  const [domains, setDomains] = useState(Array<Domain>)
-
-  async function onFinish() {
-    setModalVisible(false)
-    await init()
-  }
 
   return (
     <ScrollView style={styles.view}>
@@ -50,7 +50,7 @@ function DomainListPage({ navigation }: Readonly<{ navigation: any }>) {
         animationType="slide"
         visible={modalVisible}
       >
-        <AddModal onFinish={onFinish} />
+        <AddDomainModal onFinish={onFinish} />
       </Modal>
 
     </ScrollView >

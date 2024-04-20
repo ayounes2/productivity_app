@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native"
-import { Domain, addDomain } from '../db/domain';
-import { connectToDatabase } from "../db/db";
+import { Domain, AddDomain } from '../Db/Domain';
+import { ConnectToDatabase } from "../Db/Database";
 
 
 interface ModalProps {
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export function AddModal({ onFinish }: Readonly<ModalProps>) {
+export function AddDomainModal({ onFinish }: Readonly<ModalProps>) {
     const [name, setName] = useState('');
 
     async function handleSave() {
@@ -37,8 +37,8 @@ export function AddModal({ onFinish }: Readonly<ModalProps>) {
             id: null,
             name: name
         };
-        const db = await connectToDatabase()
-        await addDomain(db, myDomain)
+        const db = await ConnectToDatabase()
+        await AddDomain(db, myDomain)
         onFinish()
     }
 
