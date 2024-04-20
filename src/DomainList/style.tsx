@@ -6,17 +6,5 @@ export const styles = StyleSheet.create({
     },
     domain: {
         fontSize: 50,
-    },
-    activity: {
-        padding: 10,
-        color: 'white',
-        borderWidth: 1,
-        borderColor: 'black',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'black',
-        borderRadius: 50,
-        marginEnd: 10,
-        marginBottom: 10,
     }
 });

@@ -14,11 +14,11 @@ const styles = StyleSheet.create({
   },
 })
 
-const Splash = ({ navigation }: { navigation: any }) => {
+function Splash({ navigation }: Readonly<{ navigation: any }>) {
   setTimeout(() => {
     navigation.reset({
       index: 0,
-      routes: [{ name: 'DomainList' }],
+      routes: [{ name: 'Domains' }],
     });
   }, 2000)
 

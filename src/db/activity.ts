@@ -7,7 +7,7 @@ export type Activity = {
     domainId: number,
 }
 
-export const getActivityByDomainId = async (db: SQLiteDatabase, id: number): Promise<Array<Activity>> => {
+export async function getActivityByDomainId(db: SQLiteDatabase, id: number): Promise<Array<Activity>> {
     try {
         const activities: Activity[] = []
         const results = await db.executeSql(`SELECT * FROM Activities WHERE domainId = ${id}`)
@@ -23,7 +23,7 @@ export const getActivityByDomainId = async (db: SQLiteDatabase, id: number): Pro
     }
 }
 
-export const getActivities = async (db: SQLiteDatabase): Promise<Array<Activity>> => {
+export async function getActivities(db: SQLiteDatabase): Promise<Array<Activity>> {
     try {
         const activities: Activity[] = []
         const results = await db.executeSql(`SELECT * FROM Activities`)

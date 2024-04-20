@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal, ScrollView } from 'react-native';
-import { styles } from './style';
-import { Domain, addDomain, getDomains } from '../db/domain';
+import { Domain, getDomains } from '../db/domain';
 import { connectToDatabase } from '../db/db';
 import { AddModal } from './AddModal';
+import { styles } from './style';
 
-const DomainListPage = ({ navigation }: { navigation: any }) => {
+function DomainListPage({ navigation }: Readonly<{ navigation: any }>) {
   const [modalVisible, setModalVisible] = useState(false)
 
-  const init = async () => {
+  async function init() {
     const db = await connectToDatabase()
     const dbDomains = await getDomains(db)
     setDomains(dbDomains)
@@ -21,7 +21,7 @@ const DomainListPage = ({ navigation }: { navigation: any }) => {
 
   const [domains, setDomains] = useState(Array<Domain>)
 
-  const onFinish = async () => {
+  async function onFinish() {
     setModalVisible(false)
     await init()
   }
@@ -31,7 +31,7 @@ const DomainListPage = ({ navigation }: { navigation: any }) => {
       {domains.map(singleDomain => (
         <Button color={'green'}
           onPress={() => {
-            navigation.navigate('ActivityList', {
+            navigation.navigate('Activities', {
               domainId: singleDomain.id
             })
           }}

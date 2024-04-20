@@ -5,7 +5,7 @@ export type Domain = {
     name: string
 }
 
-export const getDomains = async (db: SQLiteDatabase): Promise<Array<Domain>> => {
+export async function getDomains(db: SQLiteDatabase): Promise<Array<Domain>> {
     try {
         const domains: Domain[] = []
         const results = await db.executeSql("SELECT * FROM Domains")
@@ -21,7 +21,7 @@ export const getDomains = async (db: SQLiteDatabase): Promise<Array<Domain>> => 
     }
 }
 
-export const addDomain = async (db: SQLiteDatabase, domain: Domain) => {
+export async function addDomain(db: SQLiteDatabase, domain: Domain) {
     try {
         await db.executeSql(`INSERT INTO domains (name) VALUES ('${domain.name}');`)
     } catch (error) {

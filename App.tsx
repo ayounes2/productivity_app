@@ -9,9 +9,9 @@ import ActivityListPage from './src/Activity/ActivityList';
 
 const Stack = createNativeStackNavigator();
 
-const App = () => {
+function App() {
 
-  const loadData = useCallback(async () => {
+  const loadData = useCallback(async function () {
     // create and seed tables if not exist
     const dataSeeded = await AsyncStorage.getItem('dataSeeded');
     if (dataSeeded === null) {
@@ -36,14 +36,14 @@ const App = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name='DomainList'
+          name='Domains'
           component={DomainListPage}
-          options={{ headerShown: false }}
+          options={{ headerTitleAlign: 'center' }}
         />
         <Stack.Screen
-          name='ActivityList'
+          name='Activities'
           component={ActivityListPage}
-          options={{ headerShown: false }}
+          options={{ headerTitleAlign: 'center' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -3,7 +3,7 @@ import { SQLiteDatabase, enablePromise, openDatabase, } from "react-native-sqlit
 // Enable promise for SQLite
 enablePromise(true)
 
-export const connectToDatabase = async () => {
+export async function connectToDatabase() {
     return openDatabase(
         { name: "react_native_vista.db", location: "default" },
         () => { },
@@ -14,7 +14,7 @@ export const connectToDatabase = async () => {
     )
 }
 
-export const createTables = async (db: SQLiteDatabase) => {
+export async function createTables(db: SQLiteDatabase) {
     const usersQuery = `
     CREATE TABLE IF NOT EXISTS Users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
