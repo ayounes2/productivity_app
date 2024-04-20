@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, ScrollView, Text } from 'react-native';
+import { Button, Modal, ScrollView } from 'react-native';
 import { styles } from './style';
-import { Domain, getDomains } from '../db/domain';
+import { Domain, addDomain, getDomains } from '../db/domain';
 import { connectToDatabase } from '../db/db';
+import { AddModal } from './AddModal';
 
 const DomainListPage = ({ navigation }: { navigation: any }) => {
+  const [modalVisible, setModalVisible] = useState(false)
+
   const init = async () => {
     const db = await connectToDatabase()
     const dbDomains = await getDomains(db)
     setDomains(dbDomains)
+    db.close()
   }
 
   useEffect(() => {
@@ -16,6 +20,11 @@ const DomainListPage = ({ navigation }: { navigation: any }) => {
   }, [])
 
   const [domains, setDomains] = useState(Array<Domain>)
+
+  const onFinish = async () => {
+    setModalVisible(false)
+    await init()
+  }
 
   return (
     <ScrollView style={styles.view}>
@@ -25,7 +34,6 @@ const DomainListPage = ({ navigation }: { navigation: any }) => {
             navigation.navigate('ActivityList', {
               domainId: singleDomain.id
             })
-            console.log(singleDomain.id)
           }}
           key={singleDomain.id}
           title={singleDomain.name} />
@@ -33,11 +41,18 @@ const DomainListPage = ({ navigation }: { navigation: any }) => {
 
       <Button
         onPress={() => {
-          console.log('add domain')
+          setModalVisible(true)
         }}
         title="Add Domain"
         color="#841584"
       />
+      <Modal
+        animationType="slide"
+        visible={modalVisible}
+      >
+        <AddModal onFinish={onFinish} />
+      </Modal>
+
     </ScrollView >
   )
 }

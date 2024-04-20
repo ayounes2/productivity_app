@@ -1,7 +1,7 @@
 import { SQLiteDatabase } from "react-native-sqlite-storage"
 
 export type Domain = {
-    id: number,
+    id: number | null,
     name: string
 }
 
@@ -18,5 +18,14 @@ export const getDomains = async (db: SQLiteDatabase): Promise<Array<Domain>> => 
     } catch (error) {
         console.error(error)
         throw Error("Failed to get Domains from database")
+    }
+}
+
+export const addDomain = async (db: SQLiteDatabase, domain: Domain) => {
+    try {
+        await db.executeSql(`INSERT INTO domains (name) VALUES ('${domain.name}');`)
+    } catch (error) {
+        console.error(error)
+        throw Error(`Failed to add Domain ${domain.name} from database`)
     }
 }

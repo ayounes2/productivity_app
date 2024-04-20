@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Alert, Button, Modal, StyleSheet, Switch, Text, TextInput, View } from "react-native"
+import { Domain, addDomain } from '../db/domain';
 import DropDownPicker from "react-native-dropdown-picker";
+import { connectToDatabase } from "../db/db";
 
 
 interface ModalProps {
-    onCancel: () => void; // Function for handling cancel action
-    onSave: (domainName: string) => void; // Function for handling add action
-    // myDomains: Array<DomainProps>,
+    onFinish: () => void
 }
 
 const styles = StyleSheet.create({
@@ -30,60 +30,25 @@ const styles = StyleSheet.create({
     },
 });
 
-export const AddModal: React.FC<ModalProps> = ({ onCancel, onSave }) => {
+export const AddModal: React.FC<ModalProps> = ({ onFinish }) => {
     const [name, setName] = useState('');
-    const [domainToggle, setDomainToggle] = useState(false);
 
-    const InputType = () => {
-        const onDomainToggle = () => {
-            setDomainToggle(!domainToggle);
-        }
-
-        return (
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-                <Text style={styles.formHeader}>Domain</Text>
-                <Switch
-                    onValueChange={onDomainToggle}
-                    value={domainToggle} />
-                <Text style={styles.formHeader}>Activity</Text>
-            </View>
-        );
-    }
-
-    const DomainSelector = () => {
-        const [open, setOpen] = useState(false);
-        const [value, setValue] = useState(null);
-        const [items, setItems] = useState([
-            { label: 'Apple', value: 'apple' },
-            { label: 'Banana', value: 'banana' }
-        ]);
-        return (
-            <View>
-                <Text style={styles.formHeader}>Domain</Text>
-                <DropDownPicker
-                    open={open}
-                    value={value}
-                    items={items}
-                    setOpen={setOpen}
-                    setValue={setValue}
-                    setItems={setItems}
-                />
-            </View>
-        )
-    }
-
-    const handleSave = () => {
-        onSave(name);
+    const handleSave = async () => {
+        const myDomain: Domain = {
+            id: null,
+            name: name
+        };
+        const db = await connectToDatabase()
+        await addDomain(db, myDomain)
+        onFinish()
     }
 
     return (
         <View style={styles.view}>
-            <InputType></InputType>
-            <Text style={styles.formHeader}>{domainToggle === true ? "Activity" : "Domain"} Name</Text>
+            <Text style={styles.formHeader}>Domain Name</Text>
             <TextInput onChangeText={setName} value={name} style={styles.input} />
-            {domainToggle === true ? <DomainSelector /> : <View />}
             <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
-                <Button color={'red'} onPress={onCancel} title="Cancel" />
+                <Button color={'maroon'} onPress={onFinish} title="Cancel" />
                 <Button color={'black'} onPress={handleSave} title="Add" disabled={name.length == 0} />
             </View>
 
