@@ -21,6 +21,15 @@ export async function GetDomains(db: SQLiteDatabase): Promise<Array<Domain>> {
     }
 }
 
+export async function DeleteDomain(db: SQLiteDatabase, id: number | null) {
+    try {
+        await db.executeSql(`DELETE FROM Domains WHERE id = ${id}`)
+    } catch (error) {
+        console.error(error)
+        throw Error(`Failed to delete Domain with id=${id}`)
+    }
+}
+
 export async function AddDomain(db: SQLiteDatabase, domain: Domain) {
     try {
         await db.executeSql(`INSERT INTO domains (name) VALUES ('${domain.name}');`)

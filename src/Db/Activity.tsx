@@ -23,6 +23,15 @@ export async function GetActivityByDomainId(db: SQLiteDatabase, id: number): Pro
     }
 }
 
+export async function DeleteActivity(db: SQLiteDatabase, id: number | null) {
+    try {
+        await db.executeSql(`DELETE FROM Activities WHERE id = ${id}`)
+    } catch (error) {
+        console.error(error)
+        throw Error(`Failed to delete Activity with id=${id}`)
+    }
+}
+
 export async function GetActivities(db: SQLiteDatabase): Promise<Array<Activity>> {
     try {
         const activities: Activity[] = []

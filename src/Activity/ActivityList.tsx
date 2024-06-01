@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, ScrollView, Text } from 'react-native';
-import { Activity, GetActivityByDomainId } from '../Db/Activity';
+import { Button, Modal, ScrollView, Text, View } from 'react-native';
+import { Activity, DeleteActivity, GetActivityByDomainId } from '../Db/Activity';
 import { ConnectToDatabase } from '../Db/Database';
 import { styles } from './style';
 import { AddActivityModal } from './AddActivityModal';
@@ -28,7 +28,22 @@ function ActivityListPage({ route, navigation }: Readonly<{ route: any, navigati
     return (
         <ScrollView style={styles.view}>
             {activities.map(activity => (
-                <Text style={styles.activity} key={activity.id}>{activity.name}</Text>
+                <View key={activity.id} style={{ flexDirection: 'row' }}>
+                    <View style={{ flex: 1 }}>
+                        <Button color={'green'}
+                            key={activity.id}
+                            title={activity.name} />
+                    </View>
+                    <Button
+                        color={'maroon'}
+                        title='X'
+                        onPress={async () => {
+                            let db = await ConnectToDatabase()
+                            DeleteActivity(db, activity.id)
+                            init()
+                        }}
+                    />
+                </View>
             ))}
 
             <Button
