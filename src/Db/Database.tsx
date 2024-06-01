@@ -35,7 +35,7 @@ export async function CreateTables(db: SQLiteDatabase) {
         name TEXT,
         estimatedTime INTEGER,
         domainId INTEGER,
-        FOREIGN KEY (domainId) REFERENCES domains(id) ON DELETE CASCADE
+        FOREIGN KEY (domainId) REFERENCES Domains(id) ON DELETE CASCADE
     );
     `
 
