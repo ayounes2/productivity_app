@@ -1,4 +1,4 @@
-package com.vista
+package com.productivity
 
 import android.app.Application
 import com.facebook.react.PackageList

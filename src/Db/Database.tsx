@@ -5,7 +5,7 @@ enablePromise(true)
 
 export async function ConnectToDatabase() {
     return openDatabase(
-        { name: "react_native_vista.db", location: "default" },
+        { name: "react_native_productivity.db", location: "default" },
         () => { },
         (error) => {
             console.error(error)

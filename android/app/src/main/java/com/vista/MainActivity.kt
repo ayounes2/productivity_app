@@ -1,4 +1,4 @@
-package com.vista
+package com.productivity
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
