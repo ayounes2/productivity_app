@@ -24,7 +24,7 @@ function Splash({ navigation }: Readonly<{ navigation: any }>) {
 
   return (
     <View style={styles.view}>
-      <Image source={require('../../assets/windows-vista-logo.png')} style={styles.image} />
+      <Image source={require('../../assets/producivity_logo.png')} style={styles.image} />
       <ActivityIndicator size='large' color={'#000000'} />
     </View >
   );
