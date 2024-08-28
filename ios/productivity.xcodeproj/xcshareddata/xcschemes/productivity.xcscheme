@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "vista.app"
-               BlueprintName = "vista"
-               ReferencedContainer = "container:vista.xcodeproj">
+               BuildableName = "productivity.app"
+               BlueprintName = "productivity"
+               ReferencedContainer = "container:productivity.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "vistaTests.xctest"
-               BlueprintName = "vistaTests"
-               ReferencedContainer = "container:vista.xcodeproj">
+               BuildableName = "productivityTests.xctest"
+               BlueprintName = "productivityTests"
+               ReferencedContainer = "container:productivity.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "vista.app"
-            BlueprintName = "vista"
-            ReferencedContainer = "container:vista.xcodeproj">
+            BuildableName = "productivity.app"
+            BlueprintName = "productivity"
+            ReferencedContainer = "container:productivity.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "vista.app"
-            BlueprintName = "vista"
-            ReferencedContainer = "container:vista.xcodeproj">
+            BuildableName = "productivity.app"
+            BlueprintName = "productivity"
+            ReferencedContainer = "container:productivity.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
