@@ -28,7 +28,7 @@ Eventually the goal is to have a database of domains/activities such that when a
 - add cool new designs :D
 
 Note: this app was developed mainly to delve into the react native world and learn a few things :)
-
+ 
 
 
 To run the app:
